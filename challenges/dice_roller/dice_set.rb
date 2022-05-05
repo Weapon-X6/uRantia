@@ -2,19 +2,19 @@ require_relative 'dice'
 
 class DiceSet
 
-    attr_reader :dice1, :dice2
+    # optional    
+    attr_reader :dice_array
 
     def initialize
-        roll
+        @dice_array = [Dice.new, Dice.new]
     end
 
     def roll
-        @dice1 = Dice.new
-        @dice2 = Dice.new    
+        @dice_array.each {|dice| dice.roll}
     end
 
     def display
-        puts "#{@dice1.number}, #{@dice2.number}"
+        @dice_array.map {|dice| "#{dice.number}"}.join(' - ')
     end
 
 end
