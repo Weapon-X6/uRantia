@@ -7,7 +7,7 @@ puts pig.noise
 
 puts "-" * 15
 
-Animal.types.each do |type|
+Animal.species.each do |type|
     puts type
 end
 
@@ -15,3 +15,4 @@ end
 
 wilbur = Animal.create_a_pig
 puts "#{wilbur.noise} / #{wilbur.color}"
+puts Animal.total_animals
