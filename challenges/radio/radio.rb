@@ -1,30 +1,26 @@
 class Radio
 
     attr_reader :volume, :freq, :band
-
+   
+    @@fm_frequencies = 88.0..108.0
+    @@am_frequencies = 540.0..1600.0
+    @@default_am_freq = 540.0
+    @@default_fm_freq = 88.0
     # FM 88.0 - 108.0
     # AM 540.0 - 1600.0
-    def initialize(ohms={})        
-            @freq = ohms[:freq] || 66
-    end
-
+   
     def self.am
-        Radio.new({freq: 540.0})
-        @@band = 'AM'
+        Radio.new({band: 'AM'})
     end
 
     def self.fm
-        @@band = 'FM'
-        Radio.new({freq: 88.0})
+        Radio.new({band: 'FM'})
     end
 
-    def freq=(value)
-        return if value < 88.0 || value > 108.0
-        @freq = value
-    end
-
-    def status
-        "Station #{@freq} #{@band} - volume #{@band}"
+    def initialize(ohms={})        
+        self.volume = ohms[:value] || 6
+        @band = ohms[:band] || 'FM'
+        @freq = default_freq
     end
     
     def volume=(value)
@@ -32,8 +28,27 @@ class Radio
         @volume = value
     end
 
+    def freq=(value)
+        value = value.to_f
+        value = default_freq unless allowed_frequencies.include?(value)
+        @freq = value
+    end
+
     def crank_it_up
         @volume = 11
     end
 
+    def status
+        "Station #{@freq} #{@band} - volume #{@band}"
+    end
+
+    private
+
+        def default_freq
+            @band == 'AM' ? @@default_am_freq : @@default_fm_freq
+        end
+
+        def allowed_frequencies
+            @band == 'AM' ? @@am_frequencies : @@fm_frequencies
+        end
 end
