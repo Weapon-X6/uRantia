@@ -11,8 +11,12 @@ Animal.species.each do |type|
     puts type
 end
 
-# puts Animal.types.each {|type| type}
+
 
 wilbur = Animal.create_a_pig
 puts "#{wilbur.noise} / #{wilbur.color}"
 puts Animal.total_animals
+
+puts "-" * 15
+Animal.species = ['gatillos', 'conejos', 'hares']
+puts Animal.species.each {|type| type}

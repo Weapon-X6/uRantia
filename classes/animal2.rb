@@ -17,6 +17,12 @@ class Animal
        @@species
     end
 
+    def self.species=(array)
+        return unless array.is_a?(Array)
+        @@species = array
+    end
+
+
     def self.total_animals
         @@total_animals
     end
