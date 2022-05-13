@@ -1,11 +1,3 @@
-def reverse!(string)
-
-
-    string
-end
-
-
-
 # 1503 13.05.2022
 def reverse!(str)
 
